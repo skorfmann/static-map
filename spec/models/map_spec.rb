@@ -68,19 +68,32 @@ describe Map do
       @map.to_s.should_not include("markers=")
     end
     
-    it "should include zoom level if zoom provided" do
+    it "should not include zoom level if no center provided" do
       @map.zoom = 10
+      @map.to_s.should_not include("zoom=10")
+    end
+    
+    it "should include zoom level if center and zoom level provided" do
+      @map.zoom = 10
+      @map.center = [47,11]
       @map.to_s.should include("zoom=10")
     end
     
-    it "should include span if provided" do
+    it "should not include span if no center provided" do
+      @map.span = [7,7]
+      @map.to_s.should_not include("span=7,7")
+    end
+    
+    it "should include span if center provided" do
+      @map.center = [47, 11]
       @map.span = [7,7]
       @map.to_s.should include("span=7,7")
     end
     
-    it "should ignore zoom if span given" do
+    it "should ignore zoom if span and center provided" do
       @map.zoom = 7
       @map.span = [7,7]
+      @map.center = [47, 11]
       @map.to_s.should include("span=7,7")
       @map.to_s.should_not include("zoom=")
     end

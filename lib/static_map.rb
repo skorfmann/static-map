@@ -22,11 +22,13 @@ module StaticMap
       for marker in self.markers
         map_center = marker.position if marker.use_as_center
       end
-      params << "center=#{map_center.join(",")}" if !map_center.nil?
-      if span.nil?
-        params << "zoom=#{zoom}" if !zoom.nil?
-      else
-        params << "span=#{span.join(",")}"
+      if !map_center.nil?
+        params << "center=#{map_center.join(",")}"
+        if span.nil?
+          params << "zoom=#{zoom}" if !zoom.nil?
+        elsif 
+          params << "span=#{span.join(",")}"
+        end
       end
       params << "markers=#{self.markers.join("|")}" if !markers.empty?
       BASE_URL + params.join("&")
