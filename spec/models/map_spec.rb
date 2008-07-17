@@ -51,6 +51,13 @@ describe Map do
       link.should include("key=#{key}")
     end
     
+    it "should use StaticMap::KEY if defined" do
+      key = "just a kes"
+      StaticMap::KEY = key
+      @map.key = nil
+      @map.to_s.should include("key=#{key}")
+    end
+    
     it "should include center in image url if center set manually" do
       @map.center = [47, 11]
       @map.to_s.should include("center=47,11")

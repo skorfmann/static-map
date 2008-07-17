@@ -17,7 +17,9 @@ module StaticMap
     end
     
     def to_s
-      params = ["key=#{key}", "size=#{self.width || DEFAULT_WIDTH}x#{self.height || DEFAULT_HEIGHT}"]
+      key_to_use = self.key
+      key_to_use ||= KEY if defined?(KEY)
+      params = ["key=#{key_to_use}", "size=#{self.width || DEFAULT_WIDTH}x#{self.height || DEFAULT_HEIGHT}"]
       map_center = self.center
       for marker in self.markers
         map_center = marker.position if marker.use_as_center
