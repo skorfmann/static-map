@@ -12,9 +12,12 @@ describe Marker do
   
   it "should return marker string on to_s" do
     Marker.new(:position => [1,1]).to_s.should == "1,1"
-    Marker.new(:position => [1,1], :character => "c").to_s.should == "1,1,c"
-    Marker.new(:position => [1,1], :character => "c", :size => "tiny").to_s.should == "1,1,tinyc"
+    Marker.new(:position => [1,1], :character => "c").to_s.should == "1,1"
+    Marker.new(:position => [1,1], :size => "tiny").to_s.should == "1,1"
+    Marker.new(:position => [1,1], :character => "c", :size => "tiny").to_s.should == "1,1"
     Marker.new(:position => [1,1], :character => "c", :size => "tiny", :color => "red").to_s.should == "1,1,tinyredc"
+    Marker.new(:position => [1,1], :size => "tiny", :color => "red").to_s.should == "1,1,tinyred"
+    Marker.new(:position => [1,1], :character => "c", :color => "red").to_s.should == "1,1,redc"
   end
   
   it "should throw an error when initializing withoiut position" do

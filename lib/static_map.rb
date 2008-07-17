@@ -53,9 +53,11 @@ module StaticMap
       chunks = [self.position.first, self.position.last]
       style = ""
       style << size.to_s if !size.nil?
-      style << color if !color.nil?
-      style << character if !character.nil?
-      chunks << style if style.length > 0
+      if !color.nil?
+        style << color
+        style << character if !character.nil?
+        chunks << style if style.length > 0
+      end
       chunks.join(",")
     end
   end
