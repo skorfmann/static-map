@@ -31,6 +31,8 @@ module StaticMap
         elsif 
           params << "span=#{self.span.join(",")}"
         end
+      elsif !self.zoom.nil?
+        params << "zoom=#{self.zoom}"
       end
       params << "maptype=#{self.maptype}" if !self.maptype.nil?
       params << "markers=#{self.markers.join("|")}" if !markers.empty?

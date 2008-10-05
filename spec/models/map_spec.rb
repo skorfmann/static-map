@@ -81,13 +81,14 @@ describe Map do
       @map.to_s.should_not include("zoom=")
     end
     
-    it "should not include markers if empty" do
-      @map.to_s.should_not include("markers=")
+    it "should add a zoom level even if there is not center specified" do
+      @map.center = nil
+      @map.zoom = 3
+      @map.to_s.should include("zoom=3")
     end
     
-    it "should not include zoom level if no center provided" do
-      @map.zoom = 10
-      @map.to_s.should_not include("zoom=10")
+    it "should not include markers if empty" do
+      @map.to_s.should_not include("markers=")
     end
     
     it "should include zoom level if center and zoom level provided" do
