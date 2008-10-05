@@ -41,6 +41,8 @@ module StaticMap
   end
   
   class Marker
+    DEFAULT_COLOR = "red"
+    
     class NoPositionSuppliedError < StandardError; end
     attr_accessor :position, :character, :size, :color, :use_as_center
     
@@ -60,11 +62,9 @@ module StaticMap
       chunks = [self.position.first, self.position.last]
       style = ""
       style << size.to_s if !size.nil?
-      if !color.nil?
-        style << color
-        style << character if !character.nil?
-        chunks << style if style.length > 0
-      end
+      style << (self.color || DEFAULT_COLOR)
+      style << character if !character.nil?
+      chunks << style if style.length > 0
       chunks.join(",")
     end
   end
