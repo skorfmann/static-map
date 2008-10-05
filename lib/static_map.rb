@@ -7,7 +7,7 @@ module StaticMap
     DEFAULT_WIDTH = 200
     DEFAULT_HEIGHT = 200
     
-    attr_accessor :markers, :center, :key, :zoom, :span, :width, :height
+    attr_accessor :markers, :center, :key, :zoom, :span, :width, :height, :maptype
     
     def initialize(ops = {})
       ops[:markers] ||= Array.new
@@ -26,12 +26,13 @@ module StaticMap
       end
       if !map_center.nil?
         params << "center=#{map_center.join(",")}"
-        if span.nil?
-          params << "zoom=#{zoom}" if !zoom.nil?
+        if self.span.nil?
+          params << "zoom=#{self.zoom}" if !self.zoom.nil?
         elsif 
-          params << "span=#{span.join(",")}"
+          params << "span=#{self.span.join(",")}"
         end
       end
+      params << "maptype=#{self.maptype}" if !self.maptype.nil?
       params << "markers=#{self.markers.join("|")}" if !markers.empty?
       BASE_URL + params.join("&")
     end
